@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Display | Window</title>
+
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        table {
+            border: 1px solid;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid;
+            padding: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="text-center">Display Books</h1>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Publication Date</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Book Genre</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td><a href="{% url 'update' book.id %}" class="btn btn-primary">Update</a></td>
+                    <td><a href="{% url 'delete' book.id %}" class="btn btn-danger">Delete</a></td>
+                    <td>{{ book.title }}</td>
+                    <td>
+                        {% for author in book.author.all %}
+                            {{ author.user_name }}
+                        {% endfor %}
+                    </td>
+                    <td>{{ book.publicationDate }}</td>
+                    <td>{{ book.ISBN }}</td>
+                    <td>{{ book.bookGenre }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <li class="list-group-item"><a href="{% url 'menu' %} ">Menu</a></li>
+
+</body>
+
+</html>
+
+    
